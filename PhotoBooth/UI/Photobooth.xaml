@@ -1,0 +1,111 @@
+﻿<Page x:Class="PhotoBooth.Photobooth"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:PhotoBooth"
+    mc:Ignorable="d" 
+    d:DesignHeight="600" d:DesignWidth="800"
+    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+    Title="Photobooth">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+                <ResourceDictionary Source="/Resources/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding Source={StaticResource Photos}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160*"/>
+            <ColumnDefinition Width="21*"/>
+            <ColumnDefinition Width="19*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="3" Margin="0,0,0,110" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <ComboBox Name="cbDevices" HorizontalAlignment="Right" Margin="0,-25,10,0"
+                          MinWidth="200" Width="Auto" VerticalAlignment="Top" BorderBrush="{x:Null}" Grid.ColumnSpan="3">
+                <ComboBox.Items>
+                    <ComboBoxItem Content="No Imaging Device" IsSelected="True"/>
+                </ComboBox.Items>
+            </ComboBox>
+
+            <TextBlock FontSize="40px" HorizontalAlignment="Center" Margin="269,-25,172.2,0" Foreground="White">
+            PhotoBooth
+            </TextBlock>
+
+            <Border Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    BorderBrush="DarkCyan" BorderThickness="1" Grid.ColumnSpan="3" Margin="0,0,0,-0.4">
+                <GroupBox Grid.Column="0" Grid.Row="0">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <ListBox 
+                            IsSynchronizedWithCurrentItem="True"
+                            Name="PhotosListBox" 
+                            Style="{StaticResource PhotoListBoxStyle}" 
+                            SelectionMode="Extended" 
+                            ItemsSource="{Binding}"
+                            SelectedIndex="0"
+                            MouseLeftButtonUp="OnPhotoClick">
+                        </ListBox>
+                    </ScrollViewer>
+                </GroupBox>
+            </Border>
+            <Grid.Resources>
+
+
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="653*"/>
+                <ColumnDefinition Width="131*"/>
+                <ColumnDefinition Width="16*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+
+        <Button Grid.Row="1" x:Name="btnBoothStart" Height="100" Width="200" Background="DarkCyan" Margin="275,10.4,165.4,0"
+                Click="btnBoothStart_Click">
+            <Button.Content>
+                <StaticResource ResourceKey="appbar_camera"/>
+            </Button.Content>
+        </Button>
+
+        <Grid.Resources>
+            <!--TODO: Finish this custom button style triggers-->
+            <!--<Style TargetType="{x:Type Button}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Border Name="border" Height="100" Width="200" CornerRadius="100,100,0,0" Margin="-130, 0, 0, 0" ClipToBounds="True" Background="{TemplateBinding Background}">
+                                <StaticResource ResourceKey="appbar_camera"/>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Background" TargetName="border">
+                                        <Setter.Value>
+
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>-->
+
+
+        </Grid.Resources>
+
+    </Grid>
+</Page>

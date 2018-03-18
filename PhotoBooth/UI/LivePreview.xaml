@@ -1,0 +1,45 @@
+﻿<Page x:Class="PhotoBooth.LivePreview"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PhotoBooth"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+      Title="LivePreview">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ObjectDataProvider x:Key="SessionTemplatePhotos" ObjectType="{x:Type local:SessionTemplateCollection}" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid x:Name="cvPreview"  Margin="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+        <Image Name="frameHolder" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Image>
+        
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" 
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel Name="stSnapshotPreview" Opacity="0.8" 
+                        Orientation="Vertical" Width="Auto" HorizontalAlignment="Right" 
+                        VerticalAlignment="Center" Margin="0,0,10,0" Height="Auto"
+                        DataContext="{Binding Source={StaticResource SessionTemplatePhotos}}">
+                <StackPanel.Resources>
+                    <DataTemplate DataType="{x:Type local:Photo}">
+                        <Border BorderThickness="1" BorderBrush="DarkCyan" Margin="5">
+                            <Image MaxWidth="250" MinWidth="250" MinHeight="150" Height="Auto" 
+                                   Margin="5" Source="{Binding Image}"></Image>
+                        </Border>
+                    </DataTemplate>
+                </StackPanel.Resources>
+                <ListView Name="lvSnapshots" ItemsSource="{Binding}">
+
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
